@@ -1,0 +1,7 @@
+<h1>These are all the places:</h1>
+
+<ul>
+    <% Place.all.each do |place| %>
+        <li><%= place.name %></li>
+    <% end %>
+</ul>
