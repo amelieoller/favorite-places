@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     end
 
     get '/login' do
-        @message = session[:message]
+        @message = session.delete(:message)
         erb :'/users/login'
     end
 
