@@ -10,4 +10,8 @@ class UsersController < ApplicationController
         redirect "/places"
     end
 
+    get '/login' do
+        erb :'/users/login'
+    end
+
 end
