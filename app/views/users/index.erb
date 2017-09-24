@@ -1,0 +1,7 @@
+<h1>All your places:</h1>
+
+<ul>
+    <% @user.places.each do |place| %>
+        <li><%= place.name %></li>
+    <% end %>
+</ul>
