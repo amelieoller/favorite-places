@@ -1,9 +1,12 @@
 <h1>These Are All the Places:</h1>
 
-    <% Place.all.each do |place| %>
-        <h2><%= place.name %></h2>
-        <h3><%= place.city %> | <%= place.country.name %></h3>
-        <p>Created by: <%= place.user.name %></p>
-        <a class="btn btn-primary" target="_blank" href="http://www.google.com/search?q=<%= place.name.gsub(" ", "+") %>%2C+<%= place.city.gsub(" ", "+") %>%2C+<%= place.country.name.gsub(" ", "+") %>">Search this place in Google</a>
-        <hr>
+<% p = Place.all.group_by {|country| country.country.name } %>
+<% c = p.each do |country, place| %>
+    <h2><%= country %></h2>
+    <% place.each do |place| %>
+         <h4><%= place.name %> | <%= place.city %></h4>
+         <p>Created by: <%= place.user.name %></p>
+         <a class="btn btn-primary btn-xs" target="_blank" href="http://www.google.com/search?q=<%= place.name.gsub(" ", "+") %>%2C+<%= place.city.gsub(" ", "+") %>%2C+<%= place.country.name.gsub(" ", "+") %>">Search this place in Google</a>
+         <hr>
     <% end %>
+<% end %>
