@@ -26,5 +26,14 @@ class UsersController < ApplicationController
         end
     end
 
+    get '/logout' do
+        if !logged_in?
+            redirect "/"
+        else
+            session.destroy
+            redirect "/login"
+        end
+    end
+
 
 end
