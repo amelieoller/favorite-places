@@ -29,6 +29,18 @@ class PlacesController < ApplicationController
         end
     end
 
+    patch '/places/:slug' do
+        if params[:place].empty? || params[:country].empty?
+            redirect "/places/#{params[:slug]}/edit"            
+        else
+            @place = Place.find_by_slug(params[:slug])
+            @place.update(params[:place])
+            @place.country.update(params[:country])
+            @place.save
+            redirect "/places/#{@place.slug}"
+        end
+    end
+
     get '/places/:slug' do
         @place = Place.find_by_slug(params[:slug])
         erb :'/places/show'
