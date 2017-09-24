@@ -26,6 +26,7 @@ class PlacesController < ApplicationController
         if logged_in?
             @place = Place.find_by_slug(params[:slug])
             if @place.user_id.to_i == current_user.id
+                @message = session.delete(:message)
                 erb :'/places/edit'
             else
                 redirect "/places"
@@ -37,6 +38,7 @@ class PlacesController < ApplicationController
 
     patch '/places/:slug' do
         if params[:place][:name].empty? || params[:place][:city].empty? || params[:country][:name].empty?
+            session[:message] = "Please fill out all of the fields."
             redirect "/places/#{params[:slug]}/edit"
         else
             @place = Place.find_by_slug(params[:slug])
