@@ -64,8 +64,18 @@ class PlacesController < ApplicationController
     end
 
     get '/places/:slug' do
-        @place = Place.find_by_slug(params[:slug])
-        erb :'/places/show'
+        if logged_in?
+            @place = Place.find_by_slug(params[:slug])
+            if @place.user_id.to_i == current_user.id
+                @place = Place.find_by_slug(params[:slug])
+                erb :'/places/show'
+            else
+                redirect "/places"
+            end
+        else
+            redirect '/login'
+        end
     end
+        
 
 end

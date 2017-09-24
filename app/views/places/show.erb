@@ -1,3 +1,11 @@
 <h1><%= @place.name %></h1>
 <h2><%= @place.city %></h2>
 <h2><%= @place.country.name %></h2>
+
+<div class="clearfix">
+    <a class="btn btn-primary block-left" href="/places/<%= @place.slug %>/edit">Edit</a>
+    <form class="block-left" action="/places/<%= @place.slug %>/delete" method="post">
+        <input type="hidden" id="hidden" name="_method" value="delete">
+        <input type="submit" class="btn btn-danger" value="Delete" id="delete">
+    </form>
+</div>
