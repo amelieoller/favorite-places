@@ -9,19 +9,21 @@
         <link rel="stylesheet" href="text/css" href="<%= url("/css/style.css") %>">
     </head>
     <body>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="container">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/" class="navbar-brand">Favorite Places</a></li>
-                        <li><a href="/places">All Places</a></li>
-                        <li><a href="/users/<%= current_user.slug %>">My Places</a></li>
-                        <li><a href="/places/new">Create Place</a></li>
-                        <li><a href="/logout">Logout</a></li>
-                    </ul>
+        <% if logged_in? %>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="container">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/" class="navbar-brand">Favorite Places</a></li>
+                            <li><a href="/places">All Places</a></li>
+                            <li><a href="/users/<%= current_user.slug %>">My Places</a></li>
+                            <li><a href="/places/new">Create Place</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        <% end %>
 
         <div class="container">
             <%= yield %>
