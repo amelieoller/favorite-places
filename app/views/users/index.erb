@@ -1,4 +1,4 @@
-<h1>All your places:</h1>
+<h1>All Your Places:</h1>
 
 <% @user.places.each do |place| %>
     <h2><a href="/places/<%= place.slug %>"><%= place.name %></a></h2>

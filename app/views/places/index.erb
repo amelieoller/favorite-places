@@ -1,7 +1,9 @@
-<h1>These are all the places:</h1>
+<h1>These Are All the Places:</h1>
 
     <% Place.all.each do |place| %>
         <h2><%= place.name %></h2>
         <h3><%= place.city %> | <%= place.country.name %></h3>
+        <p>Created by: <%= place.user.name %></p>
+        <a class="btn btn-primary" target="_blank" href="http://www.google.com/search?q=<%= place.name.gsub(" ", "+") %>%2C+<%= place.city.gsub(" ", "+") %>%2C+<%= place.country.name.gsub(" ", "+") %>">Search this place in Google</a>
         <hr>
     <% end %>
