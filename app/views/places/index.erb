@@ -1,7 +1,7 @@
 <h1>These are all the places:</h1>
 
-<ul>
     <% Place.all.each do |place| %>
-        <li><%= place.name %></li>
+        <h2><%= place.name %></h2>
+        <h3><%= place.city %> | <%= place.country.name %></h3>
+        <hr>
     <% end %>
-</ul>
