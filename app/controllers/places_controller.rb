@@ -4,4 +4,8 @@ class PlacesController < ApplicationController
         erb :'/places/index'
     end
 
+    get '/places/new' do
+        erb :'/places/new'
+    end
+
 end
