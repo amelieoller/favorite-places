@@ -5,5 +5,8 @@
     <p><%= place.city %></p>
     <p><%= place.country.name %></p>
     <a class="btn btn-primary" href="/places/<%= place.slug %>/edit">Edit</a>
-    <a class="btn btn-danger" href="/places/<%= place.slug %>/delete">Delete</a>
+    <form action="/places/<%= place.slug %>/delete" method="post">
+        <input type="hidden" id="hidden" name="_method" value="delete">
+        <input type="submit" class="btn btn-danger" value="Delete" id="delete">
+    </form>
 <% end %>

@@ -41,6 +41,20 @@ class PlacesController < ApplicationController
         end
     end
 
+    delete '/places/:slug/delete' do
+        if logged_in?
+            @place = Place.find_by_slug(params[:slug])
+            if @place.user_id.to_i == current_user.id
+                @place.destroy
+                redirect '/places'                
+            else
+                redirect '/places'
+            end
+        else
+            redirect '/login'
+        end
+    end
+
     get '/places/:slug' do
         @place = Place.find_by_slug(params[:slug])
         erb :'/places/show'
