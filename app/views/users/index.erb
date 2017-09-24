@@ -1,7 +1,9 @@
 <h1>All your places:</h1>
 
-<ul>
-    <% @user.places.each do |place| %>
-        <li><%= place.name %></li>
-    <% end %>
-</ul>
+<% @user.places.each do |place| %>
+    <h2><a href="/places/<%= place.slug %>"><%= place.name %></a></h2>
+    <p><%= place.city %></p>
+    <p><%= place.country.name %></p>
+    <a class="btn btn-primary" href="/places/<%= place.slug %>/edit">Edit</a>
+    <a class="btn btn-danger" href="/places/<%= place.slug %>/delete">Delete</a>
+<% end %>
