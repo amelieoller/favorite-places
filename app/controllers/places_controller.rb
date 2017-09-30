@@ -1,10 +1,12 @@
 class PlacesController < ApplicationController
     
     get '/places' do
+        authenticate_user
         erb :'/places/index'
     end
 
     get '/places/new' do
+        authenticate_user
         @message = session.delete(:message)
         erb :'/places/new'
     end
@@ -23,16 +25,13 @@ class PlacesController < ApplicationController
     end
 
     get '/places/:slug/edit' do
-        if logged_in?
-            @place = Place.find_by_slug(params[:slug])
-            if @place.user_id.to_i == current_user.id
-                @message = session.delete(:message)
-                erb :'/places/edit'
-            else
-                redirect "/places"
-            end
+        authenticate_user
+        @place = Place.find_by_slug(params[:slug])
+        if @place.user_id.to_i == current_user.id
+            @message = session.delete(:message)
+            erb :'/places/edit'
         else
-            redirect "/login"
+            redirect "/places"
         end
     end
 
@@ -50,32 +49,24 @@ class PlacesController < ApplicationController
     end
 
     delete '/places/:slug/delete' do
-        if logged_in?
-            @place = Place.find_by_slug(params[:slug])
-            if @place.user_id.to_i == current_user.id
-                @place.destroy
-                redirect "/users/#{@place.user.slug}"
-            else
-                redirect "/users/#{@place.user.slug}"
-            end
+        authenticate_user
+        @place = Place.find_by_slug(params[:slug])
+        if @place.user_id.to_i == current_user.id
+            @place.destroy
+            redirect "/users/#{@place.user.slug}"
         else
-            redirect '/login'
+            redirect "/users/#{@place.user.slug}"
         end
     end
 
     get '/places/:slug' do
-        if logged_in?
-            @place = Place.find_by_slug(params[:slug])
-            if @place.user_id.to_i == current_user.id
-                @place = Place.find_by_slug(params[:slug])
-                erb :'/places/show'
-            else
-                redirect "/places"
-            end
+        authenticate_user
+        @place = Place.find_by_slug(params[:slug])
+        if @place.user == current_user
+            erb :'/places/show'
         else
-            redirect '/login'
+            redirect "/places"
         end
     end
         
-
 end

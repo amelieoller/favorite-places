@@ -1,4 +1,5 @@
 class Place < ActiveRecord::Base
+
     belongs_to :country
     belongs_to :user
 
@@ -9,4 +10,5 @@ class Place < ActiveRecord::Base
     def self.find_by_slug(slug)
         self.all.find{ |instance| instance.slug == slug }
     end
+    
 end

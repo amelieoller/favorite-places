@@ -1,13 +1,19 @@
 class UsersController < ApplicationController
 
     get '/signup' do
+        @message = session.delete(:message)
         erb :'/users/new'
     end
 
-    post '/signup' do
-        @user = User.create(params)
-        session[:user_id] = @user.id
-        redirect "/places"
+    post '/signup' do 
+        user = User.new(params)
+        if user.save
+            session[:user_id] = user.id
+            redirect "/places"
+        else
+            session[:message] = "Please fill out all of the fields and make sure your password is longer than 8 characters."
+            redirect "/signup"
+        end        
     end
 
     get '/login' do
@@ -27,24 +33,19 @@ class UsersController < ApplicationController
     end
 
     get '/logout' do
-        if !logged_in?
-            redirect "/"
-        else
-            session.destroy
-            redirect "/login"
-        end
+        authenticate_user
+        session.destroy
+        redirect "/login"
+
     end
 
     get '/users/:slug' do
-        if logged_in?
-            @user = User.find_by_slug(params[:slug])
-            if @user.id == current_user.id
-                erb :'/users/index'
-            else
-                redirect "/places/index"
-            end
+        authenticate_user
+        @user = User.find_by_slug(params[:slug])
+        if @user.id == current_user.id
+            erb :'/users/index'
         else
-            redirect "/"
+            redirect "/places/index"
         end
     end
 
