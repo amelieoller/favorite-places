@@ -5,6 +5,7 @@ class CreatePlaces < ActiveRecord::Migration[5.1]
       t.string :city
       t.string :user_id
       t.string :country_id
+      t.string :image_url
     end
   end
 end

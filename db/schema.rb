@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170924170406) do
     t.string "city"
     t.string "user_id"
     t.string "country_id"
+    t.string "image_url"
   end
 
   create_table "users", force: :cascade do |t|

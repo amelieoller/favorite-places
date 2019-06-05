@@ -12,7 +12,7 @@ class PlacesController < ApplicationController
     end
 
     post '/places' do
-        if params[:place][:name].empty? || params[:place][:city].empty? || params[:country][:name].empty?
+        if params[:place][:name].empty? || params[:place][:city].empty? || params[:country][:name].empty? || params[:place][:image_url].empty?
             session[:message] = "Please fill out all of the fields."
             redirect "/places/new"
         else

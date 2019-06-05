@@ -27,6 +27,11 @@
             <input type="text" class="form-control" id="country" placeholder="Country" name="country[name" value="<%= @place.country.name %>">
         </div>
 
-        <button type="submit" class="btn btn-primary">Edit Place</button>
+        <div class="form-group">
+            <label for="country">Image URL</label>
+            <input type="text" class="form-control" id="image_url" placeholder="Image URL" name="place[image_url]" value="<%= @place.image_url %>">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Edits</button>
     </form>
 </div>

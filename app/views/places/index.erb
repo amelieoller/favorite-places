@@ -2,11 +2,21 @@
 
 <% p = Place.all.group_by {|country| country.country.name } %>
 <% c = p.each do |country, place| %>
-    <h2><%= country %></h2>
-    <% place.each do |place| %>
-         <h4><%= place.name %> | <%= place.city %></h4>
-         <p>Created by: <%= place.user.name %></p>
-         <a class="btn btn-primary btn-xs" target="_blank" href="http://www.google.com/search?q=<%= place.name.gsub(" ", "+") %>%2C+<%= place.city.gsub(" ", "+") %>%2C+<%= place.country.name.gsub(" ", "+") %>">Search this place in Google</a>
-         <hr>
-    <% end %>
+	<h2><%= country %></h2>
+	<% place.each do |place| %>
+
+		<div class="row">
+			<div class="col-md-3">
+				<img class="img-responsive" src="<%= place.image_url %>">
+			</div>
+
+			<div class="col-md-9">
+				<h4><%= place.name %> | <%= place.city %></h4>
+					<p>Created by: <%= place.user.name %></p>
+					<a class="btn btn-primary btn-xs" target="_blank" href="http://www.google.com/search?q=<%= place.name.gsub(" ", "+") %>%2C+<%= place.city.gsub(" ", "+") %>%2C+<%= place.country.name.gsub(" ", "+") %>">Search this place on Google</a>
+			</div>		
+		</div>
+
+		<hr>
+	<% end %>
 <% end %>
