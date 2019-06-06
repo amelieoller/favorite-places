@@ -3,20 +3,26 @@
 <% p = Place.all.group_by {|country| country.country.name } %>
 <% c = p.each do |country, place| %>
 	<h2><%= country %></h2>
+	<div class="row">
+
 	<% place.each do |place| %>
 
-		<div class="row">
-			<div class="col-md-3">
-				<img class="img-responsive" src="<%= place.image_url %>">
-			</div>
-
-			<div class="col-md-9">
-				<h4><%= place.name %> | <%= place.city %></h4>
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<img class="place-image" src="<%= place.image_url %>">
+				<div class="caption">
+					<div class="place-header"><h4><%= place.name %></h4><p><%= place.city %></p></div>
 					<p>Created by: <%= place.user.name %></p>
-					<a class="btn btn-primary btn-xs" target="_blank" href="http://www.google.com/search?q=<%= place.name.gsub(" ", "+") %>%2C+<%= place.city.gsub(" ", "+") %>%2C+<%= place.country.name.gsub(" ", "+") %>">Search this place on Google</a>
-			</div>		
+					<p>
+						<a target="_blank" href="http://www.google.com/search?q=<%= place.name.gsub(" ", "+") %>%2C+<%= place.city.gsub(" ", "+") %>%2C+<%= place.country.name.gsub(" ", "+") %>" class="btn btn-default" role="button">Google This Place</a>
+						<% if place.user === current_user %>
+							<a href="/places/<%= place.slug %>/edit" class="btn btn-primary" role="button">Edit</a>
+						<% end %>
+					</p>
+				</div>
+			</div>
 		</div>
-
-		<hr>
+	
 	<% end %>
+	</div>
 <% end %>

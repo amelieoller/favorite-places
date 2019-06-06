@@ -7,6 +7,23 @@ h2 a {
     text-decoration: underline;
 }
 
+.place-image {
+    object-fit: cover;
+    max-height: 170px;
+    width: 100%;
+}
+
+.place-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.place-header p {
+    color: grey;
+    font-style: italic;
+}
+
 .clearfix:after {
     content: ".";
     display: block;
