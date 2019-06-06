@@ -1,0 +1,17 @@
+<div class="col-sm-6 col-md-4">
+	<div class="thumbnail">
+		<img class="place-image" src="<%= place.image_url %>">
+		<div class="caption">
+			<div class="place-header"><h4><%= place.name %></h4><p><%= place.city %> | <%= place.country.name %></p></div>
+			<p>Created by: <%= place.user.name %></p>
+			<p>
+				<a class="btn btn-primary block-left" href="/places/<%= place.slug %>/edit">Edit</a>
+
+				<form action="/places/<%= place.slug %>/delete" method="post">
+					<input type="hidden" id="hidden" name="_method" value="delete">
+					<input type="submit" class="btn btn-danger" value="Delete" id="delete">
+				</form>
+			</p>
+		</div>
+	</div>
+</div>

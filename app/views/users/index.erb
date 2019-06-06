@@ -1,14 +1,7 @@
 <h1>All Your Places:</h1>
 
-<% @user.places.each do |place| %>
-    <h2><a href="/places/<%= place.slug %>"><%= place.name %></a></h2>
-    <h3><%= place.city %> | <%= place.country.name %></h3>
-    <div class="clearfix">
-        <a class="btn btn-primary block-left" href="/places/<%= place.slug %>/edit">Edit</a>
-        <form class="block-left" action="/places/<%= place.slug %>/delete" method="post">
-            <input type="hidden" id="hidden" name="_method" value="delete">
-            <input type="submit" class="btn btn-danger" value="Delete" id="delete">
-        </form>
-    </div>
-    <hr>
-<% end %>
+<div class="row">
+	<% @user.places.each do |place| %>
+		<%= erb(:place, :locals => { :place => place }) %>	
+	<% end %>
+</div>

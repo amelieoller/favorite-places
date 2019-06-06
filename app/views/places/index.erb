@@ -1,4 +1,4 @@
-<h1>These Are All the Places:</h1>
+<h1>All Places</h1>
 
 <% p = Place.all.group_by {|country| country.country.name } %>
 <% c = p.each do |country, place| %>
@@ -22,7 +22,7 @@
 				</div>
 			</div>
 		</div>
-	
+
 	<% end %>
 	</div>
 <% end %>
